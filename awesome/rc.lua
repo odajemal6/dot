@@ -49,7 +49,7 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "nm-applet", "picom","volumeicon" }) -- comma-separated entries
+run_once({"nitrogen --restore", "nm-applet", "picom","volumeicon", "pnmixer" }) -- comma-separated entries
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -253,6 +253,8 @@ globalkeys = gears.table.join(
     -- Standard program
     awful.key({modkey}, "Return", function () awful.spawn(terminal) end,
               {description = "Terminal", group = "super"}),
+    awful.key({modkey, "Shift"}, "f", function () awful.spawn("thunar") end,
+              {description = "File manager", group = "launch"}),
     awful.key({modkey}, "x", function() awful.spawn.with_shell("sh ~/.config/rofi/powermenu.sh") end,
               {description = "Power", group = "super"}),
     awful.key({modkey}, "Print", function() awful.spawn.with_shell("sh ~/.config/bspwm/scripts/screenshot.sh") end,
@@ -545,6 +547,8 @@ awful.rules.rules = {
     { rule = { class = "mpv" },
       properties = { screen = 1, fullscreen = true }
     },
+    { rule = { class = "xdman" },
+      properties = { maximized = false, floating = true }},
 --    { rule = { class = "Firefox" },
 --       properties = { opacity = 1, maximized = false, floating = false } },
 }
